@@ -15,7 +15,7 @@
   import Stitch from './tools/stitch/Stitch.svelte';
   import Split from './tools/split/Split.svelte';
 
-  const REPO = 'https://github.com/aimerneige/img-ops-website';
+  const REPO = 'https://github.com/aimerneige/tessera-website';
   const TOOL_ICONS: Record<Route, IconName> = { collage: 'auto_awesome_mosaic', stitch: 'view_agenda', split: 'grid_view' };
 
   let width = $state(innerWidth);
