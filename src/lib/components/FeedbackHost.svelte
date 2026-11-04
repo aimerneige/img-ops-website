@@ -18,7 +18,7 @@
     confirmOpen = !!confirmer.current;
   });
 
-  const slide = () => ({
+  const slide = (_n: Element) => ({
     duration: 320,
     css: (t: number) => {
       const e = 1 - Math.pow(1 - t, 3);

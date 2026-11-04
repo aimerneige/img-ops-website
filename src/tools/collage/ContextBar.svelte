@@ -86,6 +86,7 @@
   style:left="{pos.left}px"
   style:top="{pos.top}px"
   role="toolbar"
+  tabindex="-1"
   aria-label={t('ctx.label')}
   onpointerdown={(e) => e.stopPropagation()}
 >

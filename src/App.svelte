@@ -143,8 +143,7 @@
 </div>
 
 {#if compact && drawer}
-  <!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-  <div class="drawer-scrim" onclick={() => (drawer = false)}></div>
+  <div class="drawer-scrim" role="presentation" aria-hidden="true" onclick={() => (drawer = false)}></div>
   <nav class="drawer" aria-label={t('nav.tools')}>
     <div class="drawer-head">
       <Logo />

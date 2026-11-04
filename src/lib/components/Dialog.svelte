@@ -61,8 +61,8 @@
     };
   }
 
-  const fade = () => ({ duration: 200, css: (t: number) => `opacity:${t}` });
-  const rise = () => ({
+  const fade = (_n: Element) => ({ duration: 200, css: (t: number) => `opacity:${t}` });
+  const rise = (_n: Element) => ({
     duration: 380,
     css: (t: number) => {
       const e = 1 - Math.pow(1 - t, 4);
@@ -73,8 +73,7 @@
 
 {#if open}
   <div class="layer" use:portal>
-    <!-- svelte-ignore a11y_no_static_element_interactions a11y_click_events_have_key_events -->
-    <div class="scrim" transition:fade onclick={close}></div>
+    <div class="scrim" role="presentation" aria-hidden="true" transition:fade onclick={close}></div>
     <div class="dialog" class:wide role="dialog" aria-modal="true" aria-label={title} use:trap transition:rise>
       {#if icon}<span class="hero"><Icon name={icon} /></span>{/if}
       <h2 class="t-headline-s" class:center={!!icon}>{title}</h2>
