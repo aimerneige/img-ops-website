@@ -29,7 +29,7 @@ if [ ! -d .git ]; then
   git init --initial-branch=master
 fi
 git remote remove origin 2>/dev/null || true
-git remote add origin git@github.com:aimerneige/imgops.aimer.moe.git
+git remote add origin git@github.com:aimerneige/tessera.aimer.moe.git
 git add -A
 msg="${1:-update site $(date)}"
 git commit -m "$msg"
