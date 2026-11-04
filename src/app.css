@@ -1,0 +1,192 @@
+/* ───────── Base tokens (colors are injected by theme.svelte.ts) ───────── */
+:root {
+  --font: 'Roboto Flex', Roboto, 'Google Sans', 'Segoe UI', system-ui, -apple-system, 'PingFang SC',
+    'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans CJK SC', 'Noto Sans JP', 'Microsoft YaHei',
+    sans-serif;
+  --mono: 'Roboto Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Shape */
+  --shape-xs: 4px;
+  --shape-sm: 8px;
+  --shape-md: 12px;
+  --shape-lg: 16px;
+  --shape-xl: 28px;
+  --shape-full: 999px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emph-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-emph-accel: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --ease-spring: linear(
+    0, 0.009, 0.035 2.1%, 0.141, 0.281 6.7%, 0.723 12.9%, 0.938 16.7%, 1.017, 1.077, 1.121 24%,
+    1.149 26.3%, 1.159, 1.163 30.6%, 1.154 33.3%, 1.129 36.4%, 1.051 44%, 1.017 47.6%, 0.991 51.6%,
+    0.977 56.2%, 0.975 60.2%, 0.996 75.7%, 1.003 83.8%, 1
+  );
+  --dur-short: 150ms;
+  --dur-medium: 300ms;
+  --dur-long: 500ms;
+
+  /* Elevation */
+  --elev-1: 0 1px 2px rgb(0 0 0 / 0.3), 0 1px 3px 1px rgb(0 0 0 / 0.15);
+  --elev-2: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 6px 2px rgb(0 0 0 / 0.15);
+  --elev-3: 0 4px 8px 3px rgb(0 0 0 / 0.15), 0 1px 3px rgb(0 0 0 / 0.3);
+
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+#app {
+  height: 100%;
+}
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+button {
+  cursor: pointer;
+}
+:focus-visible {
+  outline: 3px solid var(--md-secondary);
+  outline-offset: 2px;
+}
+::selection {
+  background: var(--md-primary-container);
+  color: var(--md-on-primary-container);
+}
+
+/* Thin themed scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--md-outline-variant) transparent;
+}
+
+/* Typescale helpers */
+.t-display-s { font-size: 36px; line-height: 44px; font-weight: 400; }
+.t-headline-s { font-size: 24px; line-height: 32px; font-weight: 400; }
+.t-title-l { font-size: 22px; line-height: 28px; font-weight: 400; }
+.t-title-m { font-size: 16px; line-height: 24px; font-weight: 500; letter-spacing: 0.01em; }
+.t-title-s { font-size: 14px; line-height: 20px; font-weight: 500; }
+.t-label-l { font-size: 14px; line-height: 20px; font-weight: 500; }
+.t-label-m { font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: 0.04em; }
+.t-label-s { font-size: 11px; line-height: 16px; font-weight: 500; letter-spacing: 0.04em; }
+.t-body-m { font-size: 14px; line-height: 20px; }
+.t-body-s { font-size: 12px; line-height: 16px; letter-spacing: 0.03em; }
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ───────── Ripple + state layer (see lib/ripple.ts) ───────── */
+.rpl-host {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.rpl-host::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-short) linear;
+  z-index: -1;
+  border-radius: inherit;
+}
+.rpl-host:not(:disabled):not([aria-disabled='true']):hover::before {
+  opacity: 0.08;
+}
+.rpl-host:not(:disabled):focus-visible::before {
+  opacity: 0.1;
+}
+.rpl-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, currentColor 70%, transparent 100%);
+  opacity: 0.16;
+  pointer-events: none;
+  transform: scale(0);
+  animation: rpl-grow 520ms var(--ease-standard) forwards;
+  z-index: -1;
+}
+.rpl-wave.rpl-out {
+  transition: opacity 380ms linear;
+  opacity: 0;
+}
+@keyframes rpl-grow {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* View-transition based theme switch (circular reveal) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+/* Plain tooltip (lib/actions.ts) */
+.md-tooltip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  max-width: 260px;
+  padding: 4px 8px;
+  border-radius: var(--shape-xs);
+  background: var(--md-inverse-surface);
+  color: var(--md-inverse-on-surface);
+  font-size: 12px;
+  line-height: 16px;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.9;
+  transition:
+    opacity 120ms linear,
+    scale 200ms var(--ease-emph-decel);
+}
+.md-tooltip.show {
+  opacity: 1;
+  scale: 1;
+}
