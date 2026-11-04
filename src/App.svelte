@@ -235,11 +235,9 @@
     min-height: 0;
     display: grid;
     background: var(--md-surface);
-    border-top-left-radius: var(--shape-xl);
     overflow: hidden;
   }
   .compact .content {
-    border-radius: 0;
     overflow: auto;
   }
   .page {

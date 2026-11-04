@@ -77,10 +77,9 @@ const grid = (rows: number, cols: number) =>
 /** Curated presets grouped by number of cells. */
 export const PRESETS: Record<number, string[]> = {
   1: ['x'],
-  2: ['h(x,x)', 'v(x,x)', 'h[2,1](x,x)', 'v[2,1](x,x)', 'h[1,2](x,x)', 'v[1,2](x,x)'],
+  2: ['h(x,x)', 'v(x,x)'],
   3: [
     'h(x,x,x)', 'v(x,x,x)', 'h(x,v(x,x))', 'h(v(x,x),x)', 'v(x,h(x,x))', 'v(h(x,x),x)',
-    'h[2,1](x,v(x,x))', 'v[2,1](x,h(x,x))', 'h[1,2,1](x,x,x)', 'v[1,2,1](x,x,x)',
   ],
   4: [
     grid(2, 2), 'h(x,x,x,x)', 'v(x,x,x,x)', 'h[2,1](x,v(x,x,x))', 'v[2,1](x,h(x,x,x))',
@@ -89,12 +88,12 @@ export const PRESETS: Record<number, string[]> = {
   ],
   5: [
     'v(h(x,x),h(x,x,x))', 'v(h(x,x,x),h(x,x))', 'h(v(x,x),v(x,x,x))', 'h[2,1](x,v(x,x,x,x))',
-    'v[2,1](x,h(x,x,x,x))', 'h(v(x,x),x,v(x,x))', 'v(h(x,x),x,h(x,x))', 'h[2,1](v(x,x),v(x,x,x))',
-    'v[2,1](h(x,x),h(x,x,x))', 'h(x,v(x,h(x,v(x,x))))', 'v(x,x,x,x,x)', 'h(x,x,x,x,x)',
+    'v[2,1](x,h(x,x,x,x))', 'h(v(x,x),x,v(x,x))', 'v(h(x,x),x,h(x,x))',
+    'h(x,v(x,h(x,v(x,x))))', 'v(x,x,x,x,x)', 'h(x,x,x,x,x)',
   ],
   6: [
     grid(2, 3), grid(3, 2), 'v[2,1](h[2,1](x,v(x,x)),h(x,x,x))', 'h[2,1](v[2,1](x,h(x,x)),v(x,x,x))',
-    'v(h(x,x,x),h[1,2,1](x,x,x))', 'h(v(x,x),v(x,x),v(x,x))', 'v[2,1](x,h(x,x,x,x,x))',
+    'h(v(x,x),v(x,x),v(x,x))', 'v[2,1](x,h(x,x,x,x,x))',
     'h[2,1](x,v(x,x,x,x,x))', 'v(h(x,x),h(x,x,x,x))', 'h(v(x,x,x),x,v(x,x))',
   ],
   7: [
@@ -104,7 +103,7 @@ export const PRESETS: Record<number, string[]> = {
   ],
   8: [
     grid(2, 4), grid(4, 2), 'v(h(x,x,x),h(x,x),h(x,x,x))', 'h(v(x,x,x),v(x,x),v(x,x,x))',
-    'v[2,1](h(x,x),h(x,x,x,x,x,x))', 'v[2,1,1](x,h(x,x,x,x),h(x,x,x))', 'h[1,2,1](v(x,x,x),v(x,x),v(x,x,x))',
+    'v[2,1](h(x,x),h(x,x,x,x,x,x))', 'v[2,1,1](x,h(x,x,x,x),h(x,x,x))',
   ],
   9: [
     grid(3, 3), 'v(h(x,x),h(x,x,x,x,x),h(x,x))', 'h(v(x,x),v(x,x,x,x,x),v(x,x))',
